@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
 <body onload="myFunction()">
 
 <h1>Trello redirct!</h1>
+
+<script src="https://trello.com/1/client.js?key=c64bc8f6004ebe33ff5cfbef9b380bb6"></script>
 
 <script>
 function myFunction() {
@@ -19,9 +24,26 @@ if(type == "alexa"){
     var callback_method = "fragment";
     var scopeTo = "read,write,account";
     var expiration = "never";
-    redirect_url = encodeURIComponent(redirect_url);
+
+    Trello.setKey(key);
+    Trello.authorize(
+        {
+            name: "Trello Helper Extension",
+            type: "redirect",
+            expiration: "never",
+            interactive: true,
+            scope: {read: true, write: false, account: true},
+            success: function () {
+                // Can't do nothing, we've left the page
+            },
+            error: function () {
+                alert("Failed to authorize with Trello.")
+            }
+        });
+
+    //redirect_url = encodeURIComponent(redirect_url);
     //document.write(redirect_url);
-    window.location = "https://trello.com/1/authorize?callback_method="+callback_method+"&key="+key+"&expiration="+expiration+"&scope="+scopeTo+"&name="+name+"&redirect_url="+redirect_url;
+    //window.location = "https://trello.com/1/authorize?callback_method="+callback_method+"&key="+key+"&expiration="+expiration+"&scope="+scopeTo+"&name="+name+"&redirect_url=https://www.google.com";//+redirect_url;
 } else {
     
 }
