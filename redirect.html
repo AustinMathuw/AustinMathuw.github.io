@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body onload="myFunction()">
+
+<h1>Trello redirct!</h1>
+
+<script>
+function myFunction() {
+
+var url_string = window.location.href
+var url = new URL(url_string);
+var scope = url.searchParams.get("scope");
+
+
+if(scope == "alexa"){
+    var state = url.searchParams.get("state");
+    var client_id = url.searchParams.get("client_id");
+    var response_type = url.searchParams.get("response_type");
+    var redirect_uri = url.searchParams.get("redirect_uri");
+    window.location = "http://www.yoururl.com";
+} else {
+    
+}
+
+console.log(c);
+
+    alert("");
+}
+</script>
+
+</body>
+</html>
