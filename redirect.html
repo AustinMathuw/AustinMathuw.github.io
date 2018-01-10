@@ -22,8 +22,8 @@ if(scope == "alexa"){
     var scopeTo = "read,write,account";
     var expiration = "never";
     redirect_url = encodeURIComponent(redirect_url);
-    document.write(redirect_url);
-    //window.location = "https://trello.com/1/authorize?callback_method="+callback_method+"&key="+key+"&expiration="+expiration+"&redirect_url="+redirect_url+"&scope="+scope;
+    //document.write(redirect_url);
+    window.location = "https://trello.com/1/authorize?callback_method="+callback_method+"&key="+key+"&expiration="+expiration+"&redirect_url="+redirect_url+"&scope="+scope;
 } else {
     
 }
