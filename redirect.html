@@ -40,6 +40,22 @@ function myFunction() {
                     alert("Failed to authorize with Trello.")
                 }
             });
+        Trello.authorize(
+            {
+                name: name,
+                type: "redirect",
+                expiration: "never",
+                interactive: false,
+                scope: {read: true, write: false, account: true},
+                success: function () {
+                    var urlNew = new URL(window.location.href);
+                    var token = urlNew.searchParams.get("token");
+                    alert(token)
+                },
+                error: function () {
+                    alert("Failed to authorize with Trello.")
+                }
+            });
     } else {
 
     }
