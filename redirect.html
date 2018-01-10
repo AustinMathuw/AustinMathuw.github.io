@@ -11,37 +11,35 @@
 
 <script>
 function myFunction() {
-var url_string = window.location.href
-var url = new URL(url_string);
-var type = url.searchParams.get("type");
-if(type == "alexa"){
-    var state = url.searchParams.get("state");
-    var name = url.searchParams.get("client_id");
-    var response_type = url.searchParams.get("response_type");
-    var key = url.searchParams.get("key");
-    var key = "c64bc8f6004ebe33ff5cfbef9b380bb6";
-    var redirect_url =  url_string + "?redirect_url=" + url.searchParams.get("redirect_uri")+"&state="+state;
+    var url_string = window.location.href
+    var url = new URL(url_string);
+    var type = url.searchParams.get("type");
+    if(type == "alexa"){
+        var state = url.searchParams.get("state");
+        var name = url.searchParams.get("client_id");
+        var response_type = url.searchParams.get("response_type");
+        var key = url.searchParams.get("key");
+        var key = "c64bc8f6004ebe33ff5cfbef9b380bb6";
+        var redirect_url =  url_string + "?redirect_url=" + url.searchParams.get("redirect_uri")+"&state="+state;
 
-    Trello.setKey(key);
-    Trello.authorize(
-        {
-            name: name,
-            type: "redirect",
-            expiration: "never",
-            interactive: true,
-            scope: {read: true, write: false, account: true},
-            success: function () {
-                // Can't do nothing, we've left the page
-            },
-            error: function () {
-                alert("Failed to authorize with Trello.")
-            }
-        });
-} else {
-    
-}
-console.log(c);
-    alert("");
+        Trello.setKey(key);
+        Trello.authorize(
+            {
+                name: name,
+                type: "redirect",
+                expiration: "never",
+                interactive: true,
+                scope: {read: true, write: false, account: true},
+                success: function () {
+                    // Can't do nothing, we've left the page
+                },
+                error: function () {
+                    alert("Failed to authorize with Trello.")
+                }
+            });
+    } else {
+
+    }
 }
 </script>
 
