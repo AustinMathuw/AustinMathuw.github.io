@@ -14,10 +14,14 @@ var scope = url.searchParams.get("scope");
 
 if(scope == "alexa"){
     var state = url.searchParams.get("state");
-    var client_id = url.searchParams.get("client_id");
+    var name = url.searchParams.get("client_id");
     var response_type = url.searchParams.get("response_type");
-    var redirect_uri = url.searchParams.get("redirect_uri");
-    window.location = "http://www.yoururl.com";
+    var key = url.searchParams.get("key");
+    var redirect_url = url_string + "?redirect_url=" + url.searchParams.get("redirect_uri")+"&state="+state;
+    var callback_method = "fragment";
+    var scopeTo = "read,write,account";
+    var expiration = "never";
+    window.location = "https://trello.com/1/authorize?callback_method="+callback_method+"&key="+key+"&expiration="+expiration+"&redirect_url="+redirect_url+"&scope="+scope;
 } else {
     
 }
