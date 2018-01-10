@@ -32,7 +32,9 @@ function myFunction() {
                 interactive: true,
                 scope: {read: true, write: false, account: true},
                 success: function () {
-                    // Can't do nothing, we've left the page
+                    var urlNew = new URL(window.location.href);
+                    var token = urlNew.searchParams.get("token");
+                    alert(token)
                 },
                 error: function () {
                     alert("Failed to authorize with Trello.")
