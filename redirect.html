@@ -32,9 +32,7 @@ function myFunction() {
                 interactive: true,
                 scope: {read: true, write: false, account: true},
                 success: function () {
-                    var urlNew = new URL(window.location.href);
-                    var token = urlNew.searchParams.get("token");
-                    alert(token)
+                    
                 },
                 error: function () {
                     alert("Failed to authorize with Trello.")
@@ -50,7 +48,7 @@ function myFunction() {
                 success: function () {
                     var urlNew = new URL(window.location.href);
                     var token = urlNew.searchParams.get("token");
-                    alert(token)
+                    alert(token);
                 },
                 error: function () {
                     alert("Failed to authorize with Trello.")
