@@ -23,6 +23,7 @@ function myFunction() {
         var redirect_url =  url_string + "?redirect_url=" + url.searchParams.get("redirect_uri")+"&state="+state;
 
         Trello.setKey(key);
+        Trello.deauthorize();
         Trello.authorize(
             {
                 name: name,
