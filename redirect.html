@@ -17,7 +17,7 @@ if(scope == "alexa"){
     var name = url.searchParams.get("client_id");
     var response_type = url.searchParams.get("response_type");
     var key = url.searchParams.get("key");
-    var redirect_url = url_string + "?redirect_url=" + url.searchParams.get("redirect_uri")+"&state="+state;
+    var redirect_url =  encodeURI(url_string + "?redirect_url=" + url.searchParams.get("redirect_uri")+"&state="+state);
     var callback_method = "fragment";
     var scopeTo = "read,write,account";
     var expiration = "never";
