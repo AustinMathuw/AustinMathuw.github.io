@@ -24,13 +24,47 @@ const newSessionHandlers = {
             this.attributes['Trello'] = new Trello("c64bc8f6004ebe33ff5cfbef9b380bb6", this.event.session.user.accessToken);
             this.attributes["currentState"] = states.MAINPORTAL;
         }
-        t.get("/1/members/me", function(err, data) {
+        this.attributes['Trello'].get("/1/members/me", function(err, data) {
+            console.log("GET: /1/members/me");
             if (err){
                 console.log("Fail: " + err);
                 this.emit('InvalidToken');
             } else {
-                console.log(data);
-                this.emit('Introduction');
+                console.log("Success: " + data);
+                this.attributes['UserFullName'] = data.fullName;
+                this.attributes['UserName'] = data.username;
+                this.attributes['UserEmail'] = data.email;
+                this.attributes['UserMemberType'] = data.memberType;
+                this.attributes['UserInitials'] = data.initials;
+                this.attributes['UserId'] = data.id;
+                this.attributes['Trello'].get("/1/members/me/boards", function(err, data) {
+                    console.log("GET: /1/members/me/boards");
+                    if (err){
+                        console.log("Fail: " + err);
+                        this.emit('InvalidToken');
+                    } else {
+                        console.log("Success: " + data);
+                        for(var board in data) {
+                            this.attributes['UserBoards'][board.name]['id'] = board.id;
+                        }
+                        this.attributes['Trello'].get("/1/members/me/cards", function(err, data) {
+                            console.log("GET: /1/members/me/cards");
+                            if (err){
+                                console.log("Fail: " + err);
+                                this.emit('InvalidToken');
+                            } else {
+                                console.log("Success: " + data);
+                                for(var card in data) {
+                                    for(var board in this.attributes['UserBoards']) {
+                                        board['id'] = board.id;
+                                    }
+                                    this.attributes['UserBoards'][board.name]['id'] = board.id;
+                                }
+                                this.emit('Introduction');
+                            };
+                        });
+                    };
+                });
             };
         });
     },
