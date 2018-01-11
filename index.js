@@ -56,10 +56,15 @@ const newSessionHandlers = {
                                 console.log("Success: " + data);
                                 for(var card in data) {
                                     for(var board in this.attributes['UserBoards']) {
-                                        board['id'] = board.id;
+                                        if(board['id'] == card.idBoard)
+                                            board['cards'][card.id] = {
+                                                listId = card.listId,
+                                                
+                                            };
+                                        )
                                     }
-                                    this.attributes['UserBoards'][board.name]['id'] = board.id;
-                                }
+
+}
                                 this.emit('Introduction');
                             };
                         });
