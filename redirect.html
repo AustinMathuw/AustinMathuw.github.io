@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body onload="myFunction()">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body onload="myFunction()">
 
-<h1>Redirecting...</h1>
+        <a>Redirecting...</a>
 
-<script src="../client.js"></script>
-<script src="../HashSearch.js"></script>
+        <script src="../client.js"></script>
+        <script src="../HashSearch.js"></script>
 
-<script>
-function myFunction() {
-    var url_string = window.location.href
-    var url = new URL(url_string);
-    var type = url.searchParams.get("type");
-    if(type == "alexa"){
-        var state = url.searchParams.get("state");
-        var name = url.searchParams.get("client_id");
-        var response_type = url.searchParams.get("response_type");
-        var key = url.searchParams.get("key");
+        <script>
+        function myFunction() {
+            var url_string = window.location.href
+            var url = new URL(url_string);
+            var type = url.searchParams.get("type");
+            if(type == "alexa"){
+                var state = url.searchParams.get("state");
+                var name = url.searchParams.get("client_id");
+                var response_type = url.searchParams.get("response_type");
+                var key = url.searchParams.get("key");
 
-        Trello.setKey(key);
-        if (HashSearch.keyExists('token')) {
-            Trello.authorize(
-                {
-                    name: name,
-                    expiration: "never",
-                    interactive: false,
-                    scope: {read: true, write: false, account: true},
-                    success: function () {},
-                    error: function () {
-                        alert("Failed to authorize with Trello.")
-                    }
-                });
-            var redirect_url =  url.searchParams.get("redirect_uri")+"#state="+state+"&access_token="+HashSearch.get('token')+"&token_type=Bearer";
-            window.location.href = redirect_url;
-        } else {
-            Trello.authorize(
-                {
-                    name: name,
-                    type: "redirect",
-                    expiration: "never",
-                    persist: false,
-                    interactive: true,
-                    scope: {read: true, write: false, account: true},
-                    success: function () {
-                    },
-                    error: function () {
-                        alert("Failed to authorize with Trello.")
-                    }
-                });
+                Trello.setKey(key);
+                if (HashSearch.keyExists('token')) {
+                    Trello.authorize(
+                        {
+                            name: name,
+                            expiration: "never",
+                            interactive: false,
+                            scope: {read: true, write: false, account: true},
+                            success: function () {},
+                            error: function () {
+                                alert("Failed to authorize with Trello.")
+                            }
+                        });
+                    var redirect_url =  url.searchParams.get("redirect_uri")+"#state="+state+"&access_token="+HashSearch.get('token')+"&token_type=Bearer";
+                    window.location.href = redirect_url;
+                } else {
+                    Trello.authorize(
+                        {
+                            name: name,
+                            type: "redirect",
+                            expiration: "never",
+                            persist: false,
+                            interactive: true,
+                            scope: {read: true, write: false, account: true},
+                            success: function () {
+                            },
+                            error: function () {
+                                alert("Failed to authorize with Trello.")
+                            }
+                        });
+                }
+
+            } else {
+
+            }
         }
-        
-    } else {
+        </script>
 
-    }
-}
-</script>
-
-</body>
+    </body>
 </html>
