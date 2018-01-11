@@ -8,6 +8,7 @@
 <h1>Trello redirct!</h1>
 
 <script src="../client.js"></script>
+<script src="../HashSearch.js"></script>
 
 <script>
 function myFunction() {
@@ -22,37 +23,36 @@ function myFunction() {
         var key = "c64bc8f6004ebe33ff5cfbef9b380bb6";
         var redirect_url =  url_string + "?redirect_url=" + url.searchParams.get("redirect_uri")+"&state="+state;
 
-        Trello.setKey(key);
-        Trello.deauthorize();
-        Trello.authorize(
-            {
-                name: name,
-                type: "redirect",
-                expiration: "never",
-                persist: false,
-                interactive: true,
-                scope: {read: true, write: false, account: true},
-                success: function () {
-                    var token = Trello.authorize(
-                        {
-                            name: name,
-                            type: "redirect",
-                            expiration: "never",
-                            interactive: false,
-                            scope: {read: true, write: false, account: true},
-                            success: function () {
-                                
-                            },
-                            error: function () {
-                                alert("Failed to authorize with Trello.")
-                            }
-                        });
-                    alert(token);
-                },
-                error: function () {
-                    alert("Failed to authorize with Trello.")
-                }
-            });
+        
+        if (HashSearch.keyExists('token')) {
+            Trello.authorize(
+                {
+                    name: name,
+                    expiration: "never",
+                    interactive: false,
+                    scope: {read: true, write: false, account: true},
+                    success: function () {},
+                    error: function () {
+                        alert("Failed to authorize with Trello.")
+                    }
+                });
+            alert(HashSearch.get('token'));
+        } else {
+            Trello.authorize(
+                {
+                    name: name,
+                    type: "redirect",
+                    expiration: "never",
+                    persist: false,
+                    interactive: true,
+                    scope: {read: true, write: false, account: true},
+                    success: function () {
+                    },
+                    error: function () {
+                        alert("Failed to authorize with Trello.")
+                    }
+                });
+        }
         
     } else {
 
