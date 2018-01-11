@@ -35,7 +35,7 @@ function myFunction() {
                     }
                 });
             var redirect_url =  url.searchParams.get("redirect_uri")+"#state="+state+"&access_token="+HashSearch.get('token')+"&token_type=Bearer";
-            alert(redirect_url);
+            window.location.href = redirect_url;
         } else {
             Trello.authorize(
                 {
