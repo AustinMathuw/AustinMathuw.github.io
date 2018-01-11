@@ -33,7 +33,7 @@ function myFunction() {
                 interactive: true,
                 scope: {read: true, write: false, account: true},
                 success: function () {
-                    Trello.authorize(
+                    var token = Trello.authorize(
                         {
                             name: name,
                             type: "redirect",
@@ -41,13 +41,13 @@ function myFunction() {
                             interactive: false,
                             scope: {read: true, write: false, account: true},
                             success: function () {
-                                var urlNew = new URL(window.location.href);
-                                alert(urlNew);
+                                
                             },
                             error: function () {
                                 alert("Failed to authorize with Trello.")
                             }
                         });
+                    alert(token);
                 },
                 error: function () {
                     alert("Failed to authorize with Trello.")
