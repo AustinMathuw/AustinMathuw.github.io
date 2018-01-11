@@ -24,13 +24,31 @@ const newSessionHandlers = {
             this.attributes['Trello'] = new Trello("c64bc8f6004ebe33ff5cfbef9b380bb6", this.event.session.user.accessToken);
             this.attributes["currentState"] = states.MAINPORTAL;
         }
-        this.emit('Introduction');
+        t.get("/1/members/me", function(err, data) {
+            if (err){
+                console.log("Fail: " + err);
+                this.emit('InvalidToken');
+            } else {
+                console.log(data);
+                this.emit('Introduction');
+            };
+        });
     },
     'Introduction': function() {
+        console.log("INTRODUCTION");
         this.handler.state = states.MAINPORTAL;
         this.attributes["speech"] = 'Welcome to Trello for Alexa. What would you like to do?';
         this.attributes["reprompt"] = 'What would you like to do?';
         this.response.speak(this.attributes["speech"]).listen(this.attributes["reprompt"]);
+        this.emit(':responseReady');
+    },
+    'InvalidToken': function() {
+        console.log("INVALIDTOKEN");
+        this.attributes["speech"] = 'You token is invalid. Please make sure you linked ' +
+                                    'your account. If this problem persists, disable ' +
+                                    'then re-enable the skill.';
+        this.attributes["reprompt"] = '';
+        this.response.speak(this.attributes["speech"]);
         this.emit(':responseReady');
     },
     "AMAZON.StopIntent": function() {
