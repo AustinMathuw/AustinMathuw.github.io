@@ -1,6 +1,6 @@
 'use strict';
 const Alexa = require("alexa-sdk");
-var Trello = require("node-trello");
+var Trello = require("node-trello"); //https://www.npmjs.com/package/node-trello
 const appId = ''; //'amzn1.echo-sdk-ams.app.your-skill-id';
 
 exports.handler = function(event, context, callback) {
