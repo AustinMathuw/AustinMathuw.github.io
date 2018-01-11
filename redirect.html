@@ -20,7 +20,6 @@ function myFunction() {
         var name = url.searchParams.get("client_id");
         var response_type = url.searchParams.get("response_type");
         var key = url.searchParams.get("key");
-        var redirect_url =  url_string + "?redirect_url=" + url.searchParams.get("redirect_uri")+"&state="+state;
 
         Trello.setKey(key);
         if (HashSearch.keyExists('token')) {
@@ -35,7 +34,8 @@ function myFunction() {
                         alert("Failed to authorize with Trello.")
                     }
                 });
-            alert(HashSearch.get('token'));
+            var redirect_url =  url.searchParams.get("redirect_uri")+"&state="+state+"&access_token="+HashSearch.get('token')+"&token_type=code";
+            alert(redirect_url);
         } else {
             Trello.authorize(
                 {
