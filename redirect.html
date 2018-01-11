@@ -20,10 +20,9 @@ function myFunction() {
         var name = url.searchParams.get("client_id");
         var response_type = url.searchParams.get("response_type");
         var key = url.searchParams.get("key");
-        var key = "c64bc8f6004ebe33ff5cfbef9b380bb6";
         var redirect_url =  url_string + "?redirect_url=" + url.searchParams.get("redirect_uri")+"&state="+state;
 
-        
+        Trello.setKey(key);
         if (HashSearch.keyExists('token')) {
             Trello.authorize(
                 {
