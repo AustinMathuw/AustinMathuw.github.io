@@ -42,8 +42,7 @@ function myFunction() {
                             scope: {read: true, write: false, account: true},
                             success: function () {
                                 var urlNew = new URL(window.location.href);
-                                var token = urlNew.searchParams.get("token");
-                                alert(token);
+                                alert(urlNew);
                             },
                             error: function () {
                                 alert("Failed to authorize with Trello.")
